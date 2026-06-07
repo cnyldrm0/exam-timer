@@ -11,6 +11,7 @@ import '../../l10n/app_localizations.dart';
 import '../../providers/locale_provider.dart';
 import 'exam_date_editor_screen.dart';
 import 'custom_exam_editor_screen.dart';
+import '../customize/customize_screen.dart';
 
 class SettingsScreen extends ConsumerWidget {
   final VoidCallback? onBackToHome;
@@ -73,6 +74,21 @@ class SettingsScreen extends ConsumerWidget {
                         ),
                       ),
                       const SizedBox(height: 16),
+                      // Theme Change Section
+                      GlassContainer(
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                        child: ListTile(
+                          leading: Icon(Icons.palette_outlined, color: activeTheme.primary),
+                          title: Text(AppLocalizations.of(context)!.changeTheme, style: Theme.of(context).textTheme.bodyMedium),
+                          subtitle: Text(AppLocalizations.of(context)!.changeThemeSubtitle, style: Theme.of(context).textTheme.labelSmall?.copyWith(fontSize: 10)),
+                          trailing: Icon(Icons.chevron_right, color: activeTheme.outline),
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(builder: (_) => const CustomizeScreen()),
+                            );
+                          },
+                        ),
+                      ),
                       // Language Section
                       GlassContainer(
                         padding: const EdgeInsets.symmetric(vertical: 8),

@@ -287,4 +287,69 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get customExamLabel => 'CUSTOM';
+
+  @override
+  String get mockExams => 'My Exams';
+
+  @override
+  String get allFilter => 'All';
+
+  @override
+  String get customExamFilter => 'Custom Exam';
+
+  @override
+  String get addMockExam => 'Add Mock Exam';
+
+  @override
+  String get selectExamType => 'Select Exam Type';
+
+  @override
+  String get correct => 'Correct';
+
+  @override
+  String get incorrect => 'Incorrect';
+
+  @override
+  String get netScore => 'Net';
+
+  @override
+  String get totalNet => 'Total Net';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get validationExceeded =>
+      'Correct + Incorrect cannot exceed question count';
+
+  @override
+  String get mockExamSaved => 'Mock exam saved';
+
+  @override
+  String get expandChart => 'Expand Your Chart';
+
+  @override
+  String get watchAdForSlots =>
+      'Watch a short video to unlock +5 new exam slots.';
+
+  @override
+  String get slotsUnlocked => '+5 exam slots unlocked!';
+
+  @override
+  String get noMockExams => 'No mock exams added yet';
+
+  @override
+  String get mockExamDeleted => 'Mock exam deleted';
+
+  @override
+  String get changeTheme => 'Change Theme';
+
+  @override
+  String get changeThemeSubtitle => 'Customize app theme';
+
+  @override
+  String get totalCorrect => 'Total Correct';
+
+  @override
+  String get totalIncorrect => 'Total Incorrect';
 }

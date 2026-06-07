@@ -21,6 +21,8 @@ dependencies:
   url_launcher: ^6.2.5
   home_widget: ^0.9.1
   google_mobile_ads: ^5.1.0
+  fl_chart: ^0.70.2
+  uuid: ^4.5.1
 
 dev_dependencies:
   flutter_test:
@@ -43,3 +45,4 @@ flutter:
   assets:
     - lib/assets/exam_calendar.json
     - lib/assets/motivation_messages.json
+    - lib/assets/exam_templates.json

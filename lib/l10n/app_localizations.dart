@@ -631,6 +631,132 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'CUSTOM'**
   String get customExamLabel;
+
+  /// No description provided for @mockExams.
+  ///
+  /// In en, this message translates to:
+  /// **'My Exams'**
+  String get mockExams;
+
+  /// No description provided for @allFilter.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get allFilter;
+
+  /// No description provided for @customExamFilter.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom Exam'**
+  String get customExamFilter;
+
+  /// No description provided for @addMockExam.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Mock Exam'**
+  String get addMockExam;
+
+  /// No description provided for @selectExamType.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Exam Type'**
+  String get selectExamType;
+
+  /// No description provided for @correct.
+  ///
+  /// In en, this message translates to:
+  /// **'Correct'**
+  String get correct;
+
+  /// No description provided for @incorrect.
+  ///
+  /// In en, this message translates to:
+  /// **'Incorrect'**
+  String get incorrect;
+
+  /// No description provided for @netScore.
+  ///
+  /// In en, this message translates to:
+  /// **'Net'**
+  String get netScore;
+
+  /// No description provided for @totalNet.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Net'**
+  String get totalNet;
+
+  /// No description provided for @save.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
+
+  /// No description provided for @validationExceeded.
+  ///
+  /// In en, this message translates to:
+  /// **'Correct + Incorrect cannot exceed question count'**
+  String get validationExceeded;
+
+  /// No description provided for @mockExamSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Mock exam saved'**
+  String get mockExamSaved;
+
+  /// No description provided for @expandChart.
+  ///
+  /// In en, this message translates to:
+  /// **'Expand Your Chart'**
+  String get expandChart;
+
+  /// No description provided for @watchAdForSlots.
+  ///
+  /// In en, this message translates to:
+  /// **'Watch a short video to unlock +5 new exam slots.'**
+  String get watchAdForSlots;
+
+  /// No description provided for @slotsUnlocked.
+  ///
+  /// In en, this message translates to:
+  /// **'+5 exam slots unlocked!'**
+  String get slotsUnlocked;
+
+  /// No description provided for @noMockExams.
+  ///
+  /// In en, this message translates to:
+  /// **'No mock exams added yet'**
+  String get noMockExams;
+
+  /// No description provided for @mockExamDeleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Mock exam deleted'**
+  String get mockExamDeleted;
+
+  /// No description provided for @changeTheme.
+  ///
+  /// In en, this message translates to:
+  /// **'Change Theme'**
+  String get changeTheme;
+
+  /// No description provided for @changeThemeSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Customize app theme'**
+  String get changeThemeSubtitle;
+
+  /// No description provided for @totalCorrect.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Correct'**
+  String get totalCorrect;
+
+  /// No description provided for @totalIncorrect.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Incorrect'**
+  String get totalIncorrect;
 }
 
 class _AppLocalizationsDelegate

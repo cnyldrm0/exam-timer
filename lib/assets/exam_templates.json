@@ -1,0 +1,80 @@
+[
+  {
+    "exam_id": "tyt",
+    "display_name": "TYT",
+    "category": "OSYM",
+    "formula_type": "osym_4_wrong_1_right",
+    "max_net": 120.0,
+    "subjects": [
+      { "subject_name": "Türkçe", "max_questions": 40 },
+      { "subject_name": "Sosyal Bilimler", "max_questions": 20 },
+      { "subject_name": "Temel Matematik", "max_questions": 40 },
+      { "subject_name": "Fen Bilimleri", "max_questions": 20 }
+    ]
+  },
+  {
+    "exam_id": "ayt_sayisal",
+    "display_name": "AYT (Sayısal)",
+    "category": "OSYM",
+    "formula_type": "osym_4_wrong_1_right",
+    "max_net": 80.0,
+    "subjects": [
+      { "subject_name": "Matematik", "max_questions": 40 },
+      { "subject_name": "Fizik", "max_questions": 14 },
+      { "subject_name": "Kimya", "max_questions": 13 },
+      { "subject_name": "Biyoloji", "max_questions": 13 }
+    ]
+  },
+  {
+    "exam_id": "ayt_ea",
+    "display_name": "AYT (Eşit Ağırlık)",
+    "category": "OSYM",
+    "formula_type": "osym_4_wrong_1_right",
+    "max_net": 80.0,
+    "subjects": [
+      { "subject_name": "Matematik", "max_questions": 40 },
+      { "subject_name": "Türk Dili ve Edebiyatı", "max_questions": 24 },
+      { "subject_name": "Tarih-1", "max_questions": 10 },
+      { "subject_name": "Coğrafya-1", "max_questions": 6 }
+    ]
+  },
+  {
+    "exam_id": "ayt_sozel",
+    "display_name": "AYT (Sözel)",
+    "category": "OSYM",
+    "formula_type": "osym_4_wrong_1_right",
+    "max_net": 80.0,
+    "subjects": [
+      { "subject_name": "Türk Dili ve Edebiyatı", "max_questions": 24 },
+      { "subject_name": "Tarih-1", "max_questions": 10 },
+      { "subject_name": "Coğrafya-1", "max_questions": 6 },
+      { "subject_name": "Tarih-2", "max_questions": 11 },
+      { "subject_name": "Coğrafya-2", "max_questions": 11 },
+      { "subject_name": "Felsefe Grubu", "max_questions": 12 },
+      { "subject_name": "Din Kültürü", "max_questions": 6 }
+    ]
+  },
+  {
+    "exam_id": "kpss_gy_gk",
+    "display_name": "KPSS (GY-GK)",
+    "category": "OSYM",
+    "formula_type": "osym_4_wrong_1_right",
+    "max_net": 120.0,
+    "subjects": [
+      { "subject_name": "Türkçe", "max_questions": 30 },
+      { "subject_name": "Matematik", "max_questions": 30 },
+      { "subject_name": "Tarih", "max_questions": 15 },
+      { "subject_name": "Coğrafya", "max_questions": 15 },
+      { "subject_name": "Vatandaşlık", "max_questions": 15 },
+      { "subject_name": "Güncel Bilgiler", "max_questions": 15 }
+    ]
+  },
+  {
+    "exam_id": "custom",
+    "display_name": "Özel Sınav",
+    "category": "MANUAL",
+    "formula_type": "simple_net",
+    "max_net": 100.0,
+    "subjects": []
+  }
+]

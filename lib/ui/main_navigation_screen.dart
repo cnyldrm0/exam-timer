@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dashboard/dashboard_screen.dart';
 import 'settings/settings_screen.dart';
 import 'studio/widget_studio_screen.dart';
-import 'customize/customize_screen.dart';
+import 'mock_exams/mock_exams_screen.dart';
 import '../l10n/app_localizations.dart';
 import '../services/ad_manager.dart';
 
@@ -52,7 +52,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     final List<Widget> screens = [
       const DashboardScreen(),
       const WidgetStudioScreen(),
-      const CustomizeScreen(),
+      const MockExamsScreen(),
       SettingsScreen(onBackToHome: _backToHome),
     ];
 
@@ -87,9 +87,9 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
             label: AppLocalizations.of(context)!.widget,
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.auto_awesome_outlined),
-            activeIcon: const Icon(Icons.auto_awesome),
-            label: AppLocalizations.of(context)!.customize,
+            icon: const Icon(Icons.assignment_outlined),
+            activeIcon: const Icon(Icons.assignment),
+            label: AppLocalizations.of(context)!.mockExams,
           ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.settings_outlined),

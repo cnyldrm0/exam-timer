@@ -290,4 +290,68 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get customExamLabel => 'MANUEL';
+
+  @override
+  String get mockExams => 'Denemelerim';
+
+  @override
+  String get allFilter => 'Hepsi';
+
+  @override
+  String get customExamFilter => 'Özel Sınav';
+
+  @override
+  String get addMockExam => 'Deneme Ekle';
+
+  @override
+  String get selectExamType => 'Sınav Türü Seç';
+
+  @override
+  String get correct => 'Doğru';
+
+  @override
+  String get incorrect => 'Yanlış';
+
+  @override
+  String get netScore => 'Net';
+
+  @override
+  String get totalNet => 'Toplam Net';
+
+  @override
+  String get save => 'Kaydet';
+
+  @override
+  String get validationExceeded => 'Doğru + Yanlış, soru sayısını aşamaz';
+
+  @override
+  String get mockExamSaved => 'Deneme kaydedildi';
+
+  @override
+  String get expandChart => 'Grafiğini Genişlet';
+
+  @override
+  String get watchAdForSlots =>
+      '1 kısa video izleyerek +5 yeni deneme kayıt alanı aç.';
+
+  @override
+  String get slotsUnlocked => '+5 deneme alanı açıldı!';
+
+  @override
+  String get noMockExams => 'Henüz deneme eklenmedi';
+
+  @override
+  String get mockExamDeleted => 'Deneme silindi';
+
+  @override
+  String get changeTheme => 'Tema Değiştir';
+
+  @override
+  String get changeThemeSubtitle => 'Uygulama temasını özelleştir';
+
+  @override
+  String get totalCorrect => 'Toplam Doğru';
+
+  @override
+  String get totalIncorrect => 'Toplam Yanlış';
 }

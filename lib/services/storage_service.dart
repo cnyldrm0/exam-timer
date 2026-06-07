@@ -165,6 +165,46 @@ class StorageService {
     await _prefs.setString(_customExamsKey, json.encode(current));
   }
 
+  // ──────────────────────────────────────────────────────────────────────────
+  // MOCK EXAM RECORDS
+  // ──────────────────────────────────────────────────────────────────────────
+
+  static const String _mockExamRecordsKey = 'mock_exam_records';
+
+  /// Returns all saved mock exam records as a list of JSON maps.
+  List<Map<String, dynamic>> getMockExamRecords() {
+    final raw = _prefs.getString(_mockExamRecordsKey);
+    if (raw == null || raw.isEmpty) return [];
+    try {
+      final decoded = json.decode(raw) as List<dynamic>;
+      return decoded.cast<Map<String, dynamic>>();
+    } catch (_) {
+      return [];
+    }
+  }
+
+  /// Overwrites the entire mock exam records list.
+  Future<void> saveMockExamRecords(List<Map<String, dynamic>> records) async {
+    await _prefs.setString(_mockExamRecordsKey, json.encode(records));
+  }
+
+  // ──────────────────────────────────────────────────────────────────────────
+  // MOCK EXAM SLOT CAPACITY
+  // ──────────────────────────────────────────────────────────────────────────
+
+  static const String _mockExamSlotsKey = 'mock_exam_allowed_slots';
+
+  /// Returns the total number of mock exams the user is allowed to log.
+  /// Default is 5 (free tier).
+  int getMockExamAllowedSlots() {
+    return _prefs.getInt(_mockExamSlotsKey) ?? 5;
+  }
+
+  /// Sets the total allowed mock exam slots (incremented after rewarded ad).
+  Future<void> setMockExamAllowedSlots(int count) async {
+    await _prefs.setInt(_mockExamSlotsKey, count);
+  }
+
   Future<void> clearAll() async {
     await _prefs.clear();
   }
