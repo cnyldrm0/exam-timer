@@ -6,6 +6,7 @@ import 'package:home_widget/home_widget.dart';
 import '../core/models/exam_model.dart';
 import '../core/data/mock_exams.dart';
 import '../services/storage_service.dart';
+import '../services/rating_service.dart';
 
 const _channel = MethodChannel('com.ucydigital.sinavsayac/exam_sync');
 
@@ -17,10 +18,16 @@ final storageServiceProvider = Provider<StorageService>((ref) {
   return StorageService(prefs);
 });
 
+final ratingServiceProvider = Provider<RatingService>((ref) {
+  final prefs = ref.watch(sharedPreferencesProvider);
+  return RatingService(prefs);
+});
+
 class ExamNotifier extends StateNotifier<List<ExamModel>> {
   final StorageService _storageService;
+  final RatingService _ratingService;
 
-  ExamNotifier(this._storageService) : super([]) {
+  ExamNotifier(this._storageService, this._ratingService) : super([]) {
     _loadSelectedExams();
   }
 
@@ -71,6 +78,7 @@ class ExamNotifier extends StateNotifier<List<ExamModel>> {
     if (!state.any((e) => e.id == exam.id)) {
       final loaded = MockExams.allExams.firstWhere((e) => e.id == exam.id);
       state = [loaded, ...state];
+      _ratingService.requestReviewIfAppropriate();
     }
     await saveSelection();
   }
@@ -90,6 +98,7 @@ class ExamNotifier extends StateNotifier<List<ExamModel>> {
       state = state.where((e) => e.id != examId).toList();
     } else {
       state = [...state, exam];
+      _ratingService.requestReviewIfAppropriate();
     }
     
     await saveSelection();
@@ -100,6 +109,7 @@ class ExamNotifier extends StateNotifier<List<ExamModel>> {
       state = state.where((e) => e.id != exam.id).toList();
     } else {
       state = [...state, exam];
+      _ratingService.requestReviewIfAppropriate();
     }
   }
 
@@ -125,6 +135,7 @@ class ExamNotifier extends StateNotifier<List<ExamModel>> {
 
 final examProvider = StateNotifierProvider<ExamNotifier, List<ExamModel>>((ref) {
   final storageService = ref.watch(storageServiceProvider);
-  return ExamNotifier(storageService);
+  final ratingService = ref.watch(ratingServiceProvider);
+  return ExamNotifier(storageService, ratingService);
 });
 

@@ -1,39 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dashboard/dashboard_screen.dart';
 import 'settings/settings_screen.dart';
-import 'studio/widget_studio_screen.dart';
+import 'customize/customization_hub_screen.dart';
 import 'mock_exams/mock_exams_screen.dart';
 import '../l10n/app_localizations.dart';
-import '../services/ad_manager.dart';
+import '../providers/theme_provider.dart';
+import '../providers/pro_provider.dart';
 
-class MainNavigationScreen extends StatefulWidget {
+class MainNavigationScreen extends ConsumerStatefulWidget {
   const MainNavigationScreen({super.key});
 
   @override
-  State<MainNavigationScreen> createState() => _MainNavigationScreenState();
+  ConsumerState<MainNavigationScreen> createState() => _MainNavigationScreenState();
 }
 
-class _MainNavigationScreenState extends State<MainNavigationScreen> {
+class _MainNavigationScreenState extends ConsumerState<MainNavigationScreen> {
   int _selectedIndex = 0;
-  final AdManager _adManager = AdManager();
-
-  @override
-  void initState() {
-    super.initState();
-    // Load the banner ad after the first frame so that context is available.
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _adManager.loadBannerAd(context).then((_) {
-        // Refresh UI once the banner is ready.
-        if (mounted) setState(() {});
-      });
-    });
-  }
-
-  @override
-  void dispose() {
-    _adManager.dispose();
-    super.dispose();
-  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -48,53 +31,60 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final isPro = ref.read(proAccessProvider);
+    if (!isPro) {
+      // Attempt to load the banner ad (will no-op if already loading or loaded)
+      ref.read(adManagerProvider).loadBannerAd(context);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+
     final List<Widget> screens = [
       const DashboardScreen(),
-      const WidgetStudioScreen(),
+      const CustomizationHubScreen(),
       const MockExamsScreen(),
       SettingsScreen(onBackToHome: _backToHome),
     ];
 
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: IndexedStack(
-                index: _selectedIndex,
-                children: screens,
-              ),
-            ),
-            // AdMob Banner Ad
-            _adManager.getBannerAdWidget(),
-          ],
-        ),
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: screens,
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        type: BottomNavigationBarType.fixed,
-        items: [
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.home_outlined),
-            activeIcon: const Icon(Icons.home),
-            label: AppLocalizations.of(context)!.mainMenu,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.palette_outlined),
-            activeIcon: const Icon(Icons.palette),
-            label: AppLocalizations.of(context)!.widget,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.assignment_outlined),
-            activeIcon: const Icon(Icons.assignment),
-            label: AppLocalizations.of(context)!.mockExams,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.settings_outlined),
-            activeIcon: const Icon(Icons.settings),
-            label: AppLocalizations.of(context)!.settings,
+      bottomNavigationBar: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (!ref.watch(proAccessProvider)) ref.watch(adManagerProvider).getBannerAdWidget(),
+          BottomNavigationBar(
+            currentIndex: _selectedIndex,
+            onTap: _onItemTapped,
+            type: BottomNavigationBarType.fixed,
+            items: [
+              BottomNavigationBarItem(
+                icon: const Icon(Icons.home_outlined),
+                activeIcon: const Icon(Icons.home),
+                label: AppLocalizations.of(context)!.mainMenu,
+              ),
+              BottomNavigationBarItem(
+                icon: const Icon(Icons.dashboard_customize_outlined),
+                activeIcon: const Icon(Icons.dashboard_customize),
+                label: AppLocalizations.of(context)!.customize,
+              ),
+              BottomNavigationBarItem(
+                icon: const Icon(Icons.assignment_outlined),
+                activeIcon: const Icon(Icons.assignment),
+                label: AppLocalizations.of(context)!.mockExams,
+              ),
+              BottomNavigationBarItem(
+                icon: const Icon(Icons.settings_outlined),
+                activeIcon: const Icon(Icons.settings),
+                label: AppLocalizations.of(context)!.settings,
+              ),
+            ],
           ),
         ],
       ),

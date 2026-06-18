@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import '../../providers/exam_provider.dart';
 import '../../providers/theme_provider.dart';
 import '../../providers/slot_provider.dart';
+import '../../providers/pro_provider.dart';
 import '../dashboard/widgets/monetization_modal.dart';
 import '../../l10n/app_localizations.dart';
 import '../widgets/glass_container.dart';
@@ -117,6 +118,18 @@ class _CustomExamEditorScreenState
       return;
     }
 
+    final isPro = ref.read(proAccessProvider);
+    if (isPro) {
+      _executeSave();
+    } else {
+      ref.read(adManagerProvider).showInterstitialAd(
+        onComplete: _executeSave,
+      );
+    }
+  }
+
+  void _executeSave() {
+    final l10n = AppLocalizations.of(context)!;
     ref.read(examProvider.notifier).addCustomExam(
           title: _titleController.text.trim(),
           date: _selectedDate!,
@@ -124,16 +137,17 @@ class _CustomExamEditorScreenState
         );
 
     final activeTheme = ref.read(themeProvider);
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(l10n.examAdded),
-        backgroundColor: activeTheme.primary.withOpacity(0.9),
-        behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      ),
-    );
-
-    Navigator.pop(context);
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(l10n.examAdded),
+          backgroundColor: activeTheme.primary.withOpacity(0.9),
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        ),
+      );
+      Navigator.pop(context);
+    }
   }
 
   @override

@@ -13,6 +13,7 @@ import 'ui/onboarding/onboarding_screen.dart';
 import 'l10n/app_localizations.dart';
 import 'providers/locale_provider.dart';
 import 'services/storage_service.dart';
+import 'services/revenuecat_service.dart';
 
 // Manual L10n replacement since generator is failing in this environment
 class AppStrings {
@@ -38,6 +39,9 @@ Future<void> main() async {
 
   // Initialize AdMob SDK as early as possible.
   await MobileAds.instance.initialize();
+
+  // Initialize RevenueCat SDK
+  await RevenueCatService.initialize();
 
   final prefs = await SharedPreferences.getInstance();
   final storageService = StorageService(prefs);

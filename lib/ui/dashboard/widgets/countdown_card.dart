@@ -8,7 +8,7 @@ import '../../../main.dart'; // Import for AppStrings
 import '../../../l10n/app_localizations.dart';
 import 'dart:ui';
 import '../../widgets/glass_container.dart';
-import 'season_progress_bar.dart';
+import '../../settings/exam_date_editor_screen.dart';
 
 class CountdownCard extends ConsumerWidget {
   final ExamModel exam;
@@ -34,6 +34,22 @@ class CountdownCard extends ConsumerWidget {
       elevation: 8,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       items: [
+        PopupMenuItem(
+          onTap: () {
+            Future.delayed(const Duration(milliseconds: 300), () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => const ExamDateEditorScreen()),
+              );
+            });
+          },
+          child: Row(
+            children: [
+              const Icon(Icons.edit_calendar_outlined, color: Colors.lightBlueAccent, size: 18),
+              const SizedBox(width: 12),
+              Text(AppLocalizations.of(context)!.editExamDates, style: const TextStyle(color: Colors.white, fontSize: 13)),
+            ],
+          ),
+        ),
         PopupMenuItem(
           onTap: () {
             Future.delayed(const Duration(milliseconds: 300), () {
@@ -122,15 +138,21 @@ class CountdownCard extends ConsumerWidget {
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                exam.isCustom && exam.id.startsWith('CUSTOM-')
-                    ? AppLocalizations.of(context)!.customExamLabel
-                    : exam.id.toUpperCase(),
-                style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                  color: AppTheme.primary.withOpacity(0.8),
+              Expanded(
+                child: Text(
+                  exam.isCustom && exam.id.startsWith('CUSTOM-')
+                      ? AppLocalizations.of(context)!.customExamLabel
+                      : exam.id.toUpperCase(),
+                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                    color: AppTheme.primary.withOpacity(0.8),
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
+              const SizedBox(width: 8),
               Builder(
                 builder: (menuContext) => IconButton(
                   icon: const Icon(Icons.more_horiz, color: AppTheme.onSurface, size: 20),
@@ -174,13 +196,6 @@ class CountdownCard extends ConsumerWidget {
                 _buildTimeColumn(context, (diff.inSeconds % 60).toString().padLeft(2, '0'), AppStrings.secs(context), isAccent: true),
               ],
             ),
-          
-          const SizedBox(height: 32),
-          SeasonProgressBar(
-            seasonStart: exam.typicalSeasonStart,
-            examDate: exam.date,
-            currentDate: currentTime,
-          ),
         ],
       ),
     );

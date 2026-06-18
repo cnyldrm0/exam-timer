@@ -7,6 +7,8 @@ import '../../core/models/app_theme_model.dart';
 import '../../core/theme/app_theme.dart';
 import '../../providers/theme_provider.dart';
 import '../../l10n/app_localizations.dart';
+import '../../providers/pro_provider.dart';
+import '../paywall/paywall_screen.dart';
 
 class CustomizeScreen extends ConsumerWidget {
   const CustomizeScreen({super.key});
@@ -15,6 +17,7 @@ class CustomizeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final activeTheme = ref.watch(themeProvider);
     final unlockedIds = ref.watch(unlockedThemesProvider);
+    final isPro = ref.watch(proAccessProvider);
     final themes = AppThemeCatalog.themes;
 
     return Scaffold(
@@ -24,21 +27,8 @@ class CustomizeScreen extends ConsumerWidget {
           CustomScrollView(
             physics: const BouncingScrollPhysics(),
             slivers: [
-              SliverAppBar(
-                backgroundColor: activeTheme.surface.withOpacity(0.85),
-                surfaceTintColor: Colors.transparent,
-                elevation: 0,
-                pinned: true,
-                centerTitle: true,
-                automaticallyImplyLeading: false,
-                title: Text(
-                  AppLocalizations.of(context)!.customize.toUpperCase(),
-                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                    letterSpacing: 2,
-                    fontWeight: FontWeight.bold,
-                    color: activeTheme.onSurface,
-                  ),
-                ),
+              SliverToBoxAdapter(
+                child: SizedBox(height: MediaQuery.of(context).padding.top + 60),
               ),
 
               // Header info
@@ -76,9 +66,9 @@ class CustomizeScreen extends ConsumerWidget {
                     (context, index) {
                       final theme = themes[index];
                       final isActive = theme.id == activeTheme.id;
-                      // A theme is accessible if: built-in unlocked OR user earned it.
+                      // A theme is accessible if: Pro user OR built-in unlocked OR user earned it.
                       final isAccessible =
-                          theme.isUnlocked || unlockedIds.contains(theme.id);
+                          isPro || theme.isUnlocked || unlockedIds.contains(theme.id);
 
                       return _ThemeCard(
                         theme: theme,
@@ -396,6 +386,47 @@ class _ThemeCard extends StatelessWidget {
                                     Text(
                                       AppLocalizations.of(context)!.watchAd,
                                       style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w700,
+                                        letterSpacing: 0.3,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 6),
+                            // ── "Pro" button ──
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(builder: (_) => const PaywallScreen()),
+                                );
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 12, vertical: 6),
+                                decoration: BoxDecoration(
+                                  gradient: const LinearGradient(
+                                    colors: [
+                                      Colors.purple,
+                                      Colors.deepPurpleAccent,
+                                    ],
+                                  ),
+                                  borderRadius: BorderRadius.circular(20),
+                                  boxShadow: [
+                                    BoxShadow(color: Colors.purple.withOpacity(0.5), blurRadius: 4),
+                                  ],
+                                ),
+                                child: const Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(Icons.star, color: Colors.amberAccent, size: 13),
+                                    SizedBox(width: 5),
+                                    Text(
+                                      "PRO'YA GEÇ",
+                                      style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 10,
                                         fontWeight: FontWeight.w700,

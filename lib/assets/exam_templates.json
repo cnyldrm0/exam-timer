@@ -1,72 +1,643 @@
 [
   {
     "exam_id": "tyt",
-    "display_name": "TYT",
+    "display_name": "YKS 1. Oturum (TYT)",
     "category": "OSYM",
     "formula_type": "osym_4_wrong_1_right",
     "max_net": 120.0,
     "subjects": [
-      { "subject_name": "Türkçe", "max_questions": 40 },
-      { "subject_name": "Sosyal Bilimler", "max_questions": 20 },
-      { "subject_name": "Temel Matematik", "max_questions": 40 },
-      { "subject_name": "Fen Bilimleri", "max_questions": 20 }
+      {
+        "subject_name": "Türkçe",
+        "max_questions": 40
+      },
+      {
+        "subject_name": "Sosyal Bilimler",
+        "max_questions": 20
+      },
+      {
+        "subject_name": "Temel Matematik",
+        "max_questions": 40
+      },
+      {
+        "subject_name": "Fen Bilimleri",
+        "max_questions": 20
+      }
     ]
   },
   {
     "exam_id": "ayt_sayisal",
-    "display_name": "AYT (Sayısal)",
+    "display_name": "YKS 2. Oturum AYT (Sayısal)",
     "category": "OSYM",
     "formula_type": "osym_4_wrong_1_right",
     "max_net": 80.0,
     "subjects": [
-      { "subject_name": "Matematik", "max_questions": 40 },
-      { "subject_name": "Fizik", "max_questions": 14 },
-      { "subject_name": "Kimya", "max_questions": 13 },
-      { "subject_name": "Biyoloji", "max_questions": 13 }
+      {
+        "subject_name": "Matematik",
+        "max_questions": 40
+      },
+      {
+        "subject_name": "Fizik",
+        "max_questions": 14
+      },
+      {
+        "subject_name": "Kimya",
+        "max_questions": 13
+      },
+      {
+        "subject_name": "Biyoloji",
+        "max_questions": 13
+      }
     ]
   },
   {
     "exam_id": "ayt_ea",
-    "display_name": "AYT (Eşit Ağırlık)",
+    "display_name": "YKS 2. Oturum AYT (Eşit Ağırlık)",
     "category": "OSYM",
     "formula_type": "osym_4_wrong_1_right",
     "max_net": 80.0,
     "subjects": [
-      { "subject_name": "Matematik", "max_questions": 40 },
-      { "subject_name": "Türk Dili ve Edebiyatı", "max_questions": 24 },
-      { "subject_name": "Tarih-1", "max_questions": 10 },
-      { "subject_name": "Coğrafya-1", "max_questions": 6 }
+      {
+        "subject_name": "Matematik",
+        "max_questions": 40
+      },
+      {
+        "subject_name": "Türk Dili ve Edebiyatı",
+        "max_questions": 24
+      },
+      {
+        "subject_name": "Tarih-1",
+        "max_questions": 10
+      },
+      {
+        "subject_name": "Coğrafya-1",
+        "max_questions": 6
+      }
     ]
   },
   {
     "exam_id": "ayt_sozel",
-    "display_name": "AYT (Sözel)",
+    "display_name": "YKS 2. Oturum AYT (Sözel)",
     "category": "OSYM",
     "formula_type": "osym_4_wrong_1_right",
     "max_net": 80.0,
     "subjects": [
-      { "subject_name": "Türk Dili ve Edebiyatı", "max_questions": 24 },
-      { "subject_name": "Tarih-1", "max_questions": 10 },
-      { "subject_name": "Coğrafya-1", "max_questions": 6 },
-      { "subject_name": "Tarih-2", "max_questions": 11 },
-      { "subject_name": "Coğrafya-2", "max_questions": 11 },
-      { "subject_name": "Felsefe Grubu", "max_questions": 12 },
-      { "subject_name": "Din Kültürü", "max_questions": 6 }
+      {
+        "subject_name": "Türk Dili ve Edebiyatı",
+        "max_questions": 24
+      },
+      {
+        "subject_name": "Tarih-1",
+        "max_questions": 10
+      },
+      {
+        "subject_name": "Coğrafya-1",
+        "max_questions": 6
+      },
+      {
+        "subject_name": "Tarih-2",
+        "max_questions": 11
+      },
+      {
+        "subject_name": "Coğrafya-2",
+        "max_questions": 11
+      },
+      {
+        "subject_name": "Felsefe Grubu",
+        "max_questions": 12
+      },
+      {
+        "subject_name": "Din Kültürü",
+        "max_questions": 6
+      }
     ]
   },
   {
-    "exam_id": "kpss_gy_gk",
-    "display_name": "KPSS (GY-GK)",
+    "exam_id": "ydt",
+    "display_name": "YKS 3. Oturum (YDT)",
+    "category": "OSYM",
+    "formula_type": "osym_4_wrong_1_right",
+    "max_net": 80.0,
+    "subjects": [
+      {
+        "subject_name": "Yabancı Dil",
+        "max_questions": 80
+      }
+    ]
+  },
+  {
+    "exam_id": "kpss_lisans",
+    "display_name": "KPSS Lisans (GY-GK)",
     "category": "OSYM",
     "formula_type": "osym_4_wrong_1_right",
     "max_net": 120.0,
     "subjects": [
-      { "subject_name": "Türkçe", "max_questions": 30 },
-      { "subject_name": "Matematik", "max_questions": 30 },
-      { "subject_name": "Tarih", "max_questions": 15 },
-      { "subject_name": "Coğrafya", "max_questions": 15 },
-      { "subject_name": "Vatandaşlık", "max_questions": 15 },
-      { "subject_name": "Güncel Bilgiler", "max_questions": 15 }
+      {
+        "subject_name": "Genel Yetenek (Türkçe, Mat)",
+        "max_questions": 60
+      },
+      {
+        "subject_name": "Genel Kültür (Tar, Coğ, Vat, Güncel)",
+        "max_questions": 60
+      }
+    ]
+  },
+  {
+    "exam_id": "kpss_onlisans",
+    "display_name": "KPSS Ön Lisans",
+    "category": "OSYM",
+    "formula_type": "osym_4_wrong_1_right",
+    "max_net": 120.0,
+    "subjects": [
+      {
+        "subject_name": "Genel Yetenek",
+        "max_questions": 60
+      },
+      {
+        "subject_name": "Genel Kültür",
+        "max_questions": 60
+      }
+    ]
+  },
+  {
+    "exam_id": "kpss_ortaogretim",
+    "display_name": "KPSS Ortaöğretim",
+    "category": "OSYM",
+    "formula_type": "osym_4_wrong_1_right",
+    "max_net": 120.0,
+    "subjects": [
+      {
+        "subject_name": "Genel Yetenek",
+        "max_questions": 60
+      },
+      {
+        "subject_name": "Genel Kültür",
+        "max_questions": 60
+      }
+    ]
+  },
+  {
+    "exam_id": "kpss_alan",
+    "display_name": "KPSS Lisans (Alan Bilgisi)",
+    "category": "OSYM",
+    "formula_type": "osym_4_wrong_1_right",
+    "max_net": 120.0,
+    "subjects": [
+      {
+        "subject_name": "1. Alan Testi",
+        "max_questions": 40
+      },
+      {
+        "subject_name": "2. Alan Testi",
+        "max_questions": 40
+      },
+      {
+        "subject_name": "3. Alan Testi",
+        "max_questions": 40
+      }
+    ]
+  },
+  {
+    "exam_id": "kpss_dhbt",
+    "display_name": "KPSS Din Hizmetleri Alan Bilgisi (DHBT)",
+    "category": "OSYM",
+    "formula_type": "osym_4_wrong_1_right",
+    "max_net": 40.0,
+    "subjects": [
+      {
+        "subject_name": "DHBT-1 (Temel Dini Bilgiler)",
+        "max_questions": 20
+      },
+      {
+        "subject_name": "DHBT-2 (Alan Bilgisi)",
+        "max_questions": 20
+      }
+    ]
+  },
+  {
+    "exam_id": "ales",
+    "display_name": "ALES",
+    "category": "OSYM",
+    "formula_type": "osym_4_wrong_1_right",
+    "max_net": 100.0,
+    "subjects": [
+      {
+        "subject_name": "Sayısal",
+        "max_questions": 50
+      },
+      {
+        "subject_name": "Sözel",
+        "max_questions": 50
+      }
+    ]
+  },
+  {
+    "exam_id": "dgs",
+    "display_name": "DGS",
+    "category": "OSYM",
+    "formula_type": "osym_4_wrong_1_right",
+    "max_net": 100.0,
+    "subjects": [
+      {
+        "subject_name": "Sayısal",
+        "max_questions": 50
+      },
+      {
+        "subject_name": "Sözel",
+        "max_questions": 50
+      }
+    ]
+  },
+  {
+    "exam_id": "msu",
+    "display_name": "MSÜ",
+    "category": "OSYM",
+    "formula_type": "osym_4_wrong_1_right",
+    "max_net": 120.0,
+    "subjects": [
+      {
+        "subject_name": "Türkçe",
+        "max_questions": 40
+      },
+      {
+        "subject_name": "Sosyal Bilimler",
+        "max_questions": 20
+      },
+      {
+        "subject_name": "Temel Matematik",
+        "max_questions": 40
+      },
+      {
+        "subject_name": "Fen Bilimleri",
+        "max_questions": 20
+      }
+    ]
+  },
+  {
+    "exam_id": "yds",
+    "display_name": "YDS",
+    "category": "OSYM",
+    "formula_type": "simple_net",
+    "max_net": 80.0,
+    "subjects": [
+      {
+        "subject_name": "Yabancı Dil",
+        "max_questions": 80
+      }
+    ]
+  },
+  {
+    "exam_id": "e_yds",
+    "display_name": "e-YDS",
+    "category": "OSYM",
+    "formula_type": "simple_net",
+    "max_net": 80.0,
+    "subjects": [
+      {
+        "subject_name": "Yabancı Dil",
+        "max_questions": 80
+      }
+    ]
+  },
+  {
+    "exam_id": "yokdil",
+    "display_name": "YÖKDİL",
+    "category": "OSYM",
+    "formula_type": "simple_net",
+    "max_net": 80.0,
+    "subjects": [
+      {
+        "subject_name": "Yabancı Dil",
+        "max_questions": 80
+      }
+    ]
+  },
+  {
+    "exam_id": "e_yokdil",
+    "display_name": "e-YÖKDİL",
+    "category": "OSYM",
+    "formula_type": "simple_net",
+    "max_net": 80.0,
+    "subjects": [
+      {
+        "subject_name": "Yabancı Dil",
+        "max_questions": 80
+      }
+    ]
+  },
+  {
+    "exam_id": "e_tep",
+    "display_name": "e-TEP",
+    "category": "OSYM",
+    "formula_type": "simple_net",
+    "max_net": 80.0,
+    "subjects": [
+      {
+        "subject_name": "İngilizce Yeterlik",
+        "max_questions": 80
+      }
+    ]
+  },
+  {
+    "exam_id": "e_ydts",
+    "display_name": "e-YDTS",
+    "category": "OSYM",
+    "formula_type": "simple_net",
+    "max_net": 80.0,
+    "subjects": [
+      {
+        "subject_name": "Yabancı Dil Olarak Türkçe",
+        "max_questions": 80
+      }
+    ]
+  },
+  {
+    "exam_id": "tus",
+    "display_name": "TUS",
+    "category": "OSYM",
+    "formula_type": "osym_4_wrong_1_right",
+    "max_net": 200.0,
+    "subjects": [
+      {
+        "subject_name": "Temel Tıp Bilimleri Testi",
+        "max_questions": 100
+      },
+      {
+        "subject_name": "Klinik Tıp Bilimleri Testi",
+        "max_questions": 100
+      }
+    ]
+  },
+  {
+    "exam_id": "sts_tip",
+    "display_name": "STS Tıp Doktorluğu",
+    "category": "OSYM",
+    "formula_type": "osym_4_wrong_1_right",
+    "max_net": 100.0,
+    "subjects": [
+      {
+        "subject_name": "Klinik Tıp Bilimleri",
+        "max_questions": 100
+      }
+    ]
+  },
+  {
+    "exam_id": "dus",
+    "display_name": "DUS",
+    "category": "OSYM",
+    "formula_type": "osym_4_wrong_1_right",
+    "max_net": 120.0,
+    "subjects": [
+      {
+        "subject_name": "Temel Diş Hekimliği Bilimleri",
+        "max_questions": 40
+      },
+      {
+        "subject_name": "Klinik Diş Hekimliği Bilimleri",
+        "max_questions": 80
+      }
+    ]
+  },
+  {
+    "exam_id": "sts_dis",
+    "display_name": "STS Diş Hekimliği",
+    "category": "OSYM",
+    "formula_type": "osym_4_wrong_1_right",
+    "max_net": 120.0,
+    "subjects": [
+      {
+        "subject_name": "Temel Diş Hekimliği Bilimleri",
+        "max_questions": 40
+      },
+      {
+        "subject_name": "Klinik Diş Hekimliği Bilimleri",
+        "max_questions": 80
+      }
+    ]
+  },
+  {
+    "exam_id": "eus",
+    "display_name": "EUS",
+    "category": "OSYM",
+    "formula_type": "osym_4_wrong_1_right",
+    "max_net": 75.0,
+    "subjects": [
+      {
+        "subject_name": "Eczacılık Meslek Bilimleri",
+        "max_questions": 75
+      }
+    ]
+  },
+  {
+    "exam_id": "sts_eczacilik",
+    "display_name": "STS Eczacılık",
+    "category": "OSYM",
+    "formula_type": "osym_4_wrong_1_right",
+    "max_net": 75.0,
+    "subjects": [
+      {
+        "subject_name": "Eczacılık Meslek Bilimleri",
+        "max_questions": 75
+      }
+    ]
+  },
+  {
+    "exam_id": "ydus",
+    "display_name": "YDUS",
+    "category": "OSYM",
+    "formula_type": "osym_4_wrong_1_right",
+    "max_net": 80.0,
+    "subjects": [
+      {
+        "subject_name": "Yan Dal Uzmanlık Alan Bilgisi",
+        "max_questions": 80
+      }
+    ]
+  },
+  {
+    "exam_id": "meb_ags",
+    "display_name": "MEB-AGS",
+    "category": "OSYM",
+    "formula_type": "osym_4_wrong_1_right",
+    "max_net": 80.0,
+    "subjects": [
+      {
+        "subject_name": "Sözel Yetenek",
+        "max_questions": 15
+      },
+      {
+        "subject_name": "Sayısal Yetenek",
+        "max_questions": 15
+      },
+      {
+        "subject_name": "Eğitim Bil., Tarih, Coğrafya, Mevzuat",
+        "max_questions": 50
+      }
+    ]
+  },
+  {
+    "exam_id": "meb_ekys",
+    "display_name": "MEB-EKYS",
+    "category": "OSYM",
+    "formula_type": "osym_4_wrong_1_right",
+    "max_net": 80.0,
+    "subjects": [
+      {
+        "subject_name": "Genel Kültür",
+        "max_questions": 16
+      },
+      {
+        "subject_name": "Atatürk İlkeleri",
+        "max_questions": 8
+      },
+      {
+        "subject_name": "Değerler Eğitimi",
+        "max_questions": 8
+      },
+      {
+        "subject_name": "Eğitim ve Öğretimde Etik",
+        "max_questions": 8
+      },
+      {
+        "subject_name": "Eğitim Bilimleri",
+        "max_questions": 24
+      },
+      {
+        "subject_name": "Mevzuat",
+        "max_questions": 16
+      }
+    ]
+  },
+  {
+    "exam_id": "sts_ogretmenlik",
+    "display_name": "STS Öğretmenlik",
+    "category": "OSYM",
+    "formula_type": "osym_4_wrong_1_right",
+    "max_net": 120.0,
+    "subjects": [
+      {
+        "subject_name": "Genel Yetenek ve Genel Kültür",
+        "max_questions": 60
+      },
+      {
+        "subject_name": "Eğitim Bilimleri",
+        "max_questions": 60
+      }
+    ]
+  },
+  {
+    "exam_id": "hmgs",
+    "display_name": "HMGS",
+    "category": "OSYM",
+    "formula_type": "simple_net",
+    "max_net": 100.0,
+    "subjects": [
+      {
+        "subject_name": "Hukuk Alan Bilgisi",
+        "max_questions": 100
+      }
+    ]
+  },
+  {
+    "exam_id": "iyos",
+    "display_name": "İYÖS",
+    "category": "OSYM",
+    "formula_type": "simple_net",
+    "max_net": 100.0,
+    "subjects": [
+      {
+        "subject_name": "İdari Yargı Alan Bilgisi",
+        "max_questions": 100
+      }
+    ]
+  },
+  {
+    "exam_id": "guy",
+    "display_name": "GUY",
+    "category": "OSYM",
+    "formula_type": "osym_4_wrong_1_right",
+    "max_net": 100.0,
+    "subjects": [
+      {
+        "subject_name": "Alan Bilgisi",
+        "max_questions": 80
+      },
+      {
+        "subject_name": "Genel Yetenek - Genel Kültür",
+        "max_questions": 20
+      }
+    ]
+  },
+  {
+    "exam_id": "dib_mbsts",
+    "display_name": "DİB-MBSTS",
+    "category": "OSYM",
+    "formula_type": "osym_4_wrong_1_right",
+    "max_net": 60.0,
+    "subjects": [
+      {
+        "subject_name": "Mesleki Bilgiler",
+        "max_questions": 60
+      }
+    ]
+  },
+  {
+    "exam_id": "bkubts",
+    "display_name": "BKUBTS",
+    "category": "OSYM",
+    "formula_type": "simple_net",
+    "max_net": 80.0,
+    "subjects": [
+      {
+        "subject_name": "Bitki Koruma Ürünleri ve Mevzuat",
+        "max_questions": 80
+      }
+    ]
+  },
+  {
+    "exam_id": "ekpss",
+    "display_name": "EKPSS",
+    "category": "OSYM",
+    "formula_type": "osym_4_wrong_1_right",
+    "max_net": 60.0,
+    "subjects": [
+      {
+        "subject_name": "Genel Yetenek",
+        "max_questions": 30
+      },
+      {
+        "subject_name": "Genel Kültür",
+        "max_questions": 30
+      }
+    ]
+  },
+  {
+    "exam_id": "tr_yos",
+    "display_name": "TR-YÖS",
+    "category": "OSYM",
+    "formula_type": "osym_4_wrong_1_right",
+    "max_net": 80.0,
+    "subjects": [
+      {
+        "subject_name": "Sayısal Yetenek",
+        "max_questions": 40
+      },
+      {
+        "subject_name": "Temel Matematik",
+        "max_questions": 40
+      }
+    ]
+  },
+  {
+    "exam_id": "ozyes",
+    "display_name": "ÖZYES",
+    "category": "OSYM",
+    "formula_type": "simple_net",
+    "max_net": 100.0,
+    "subjects": [
+      {
+        "subject_name": "Özel Yetenek / Spor Bilimleri Testi",
+        "max_questions": 100
+      }
     ]
   },
   {

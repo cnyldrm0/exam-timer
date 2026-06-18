@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../core/models/mock_exam_template.dart';
 import '../services/storage_service.dart';
 import 'exam_provider.dart'; // for storageServiceProvider
+import 'pro_provider.dart';
 
 // ─── Exam Templates Provider ────────────────────────────────────────────────
 
@@ -76,20 +77,24 @@ final filteredMockExamsProvider = Provider<List<MockExamRecord>>((ref) {
 
 class MockExamSlotsNotifier extends StateNotifier<int> {
   final StorageService _storageService;
+  final bool _isPro;
 
-  MockExamSlotsNotifier(this._storageService)
-      : super(_storageService.getMockExamAllowedSlots());
+  MockExamSlotsNotifier(this._storageService, this._isPro)
+      : super(_isPro ? 9999 : _storageService.getMockExamAllowedSlots());
 
   /// Adds +5 slots after rewarded ad.
   Future<void> addSlots([int count = 5]) async {
-    final newTotal = state + count;
-    await _storageService.setMockExamAllowedSlots(newTotal);
-    state = newTotal;
+    final realTotal = _storageService.getMockExamAllowedSlots() + count;
+    await _storageService.setMockExamAllowedSlots(realTotal);
+    if (!_isPro) {
+      state = realTotal;
+    }
   }
 }
 
 final mockExamSlotsProvider =
     StateNotifierProvider<MockExamSlotsNotifier, int>((ref) {
   final storage = ref.watch(storageServiceProvider);
-  return MockExamSlotsNotifier(storage);
+  final isPro = ref.watch(proAccessProvider);
+  return MockExamSlotsNotifier(storage, isPro);
 });

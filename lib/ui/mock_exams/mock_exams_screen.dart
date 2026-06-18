@@ -1,10 +1,10 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:intl/intl.dart';
 
+import '../../core/models/app_theme_model.dart';
 import '../../core/models/mock_exam_template.dart';
 import '../../providers/mock_exam_provider.dart';
 import '../../providers/theme_provider.dart';
@@ -39,6 +39,7 @@ class MockExamsScreen extends ConsumerWidget {
                 pinned: true,
                 centerTitle: true,
                 automaticallyImplyLeading: false,
+                leading: const SizedBox(width: 48), // Keeps title perfectly centered
                 title: Text(
                   AppLocalizations.of(context)!.mockExams.toUpperCase(),
                   style: Theme.of(context).textTheme.labelSmall?.copyWith(
@@ -47,6 +48,16 @@ class MockExamsScreen extends ConsumerWidget {
                         color: activeTheme.onSurface,
                       ),
                 ),
+                actions: [
+                  IconButton(
+                    onPressed: () => ref.read(selectedFilterProvider.notifier).state = 'all',
+                    icon: Icon(
+                      Icons.history_rounded,
+                      color: filter == 'all' ? activeTheme.primary : activeTheme.onSurface.withOpacity(0.5),
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                ],
               ),
 
               // ── Chip Selector ──
@@ -65,21 +76,22 @@ class MockExamsScreen extends ConsumerWidget {
               ),
 
               // ── Chart ──
-              SliverToBoxAdapter(
-                child: templatesAsync.when(
-                  data: (templates) => _NetChart(
-                    records: filteredRecords,
-                    filter: filter,
-                    templates: templates,
-                    theme: activeTheme,
+              if (filter != 'all')
+                SliverToBoxAdapter(
+                  child: templatesAsync.when(
+                    data: (templates) => _NetChart(
+                      records: filteredRecords,
+                      filter: filter,
+                      templates: templates,
+                      theme: activeTheme,
+                    ),
+                    loading: () => const SizedBox(height: 200),
+                    error: (_, __) => const SizedBox(height: 200),
                   ),
-                  loading: () => const SizedBox(height: 200),
-                  error: (_, __) => const SizedBox(height: 200),
                 ),
-              ),
 
               // ── Stats Summary ──
-              if (filteredRecords.isNotEmpty)
+              if (filter != 'all' && filteredRecords.isNotEmpty)
                 SliverToBoxAdapter(
                   child: _StatsSummary(
                     records: filteredRecords,
@@ -153,7 +165,7 @@ class MockExamsScreen extends ConsumerWidget {
       ),
       floatingActionButton: templatesAsync.when(
         data: (templates) => _buildFab(
-            context, ref, templates, allRecords.length, allowedSlots),
+            context, ref, templates, allRecords.length, allowedSlots, filter),
         loading: () => null,
         error: (_, __) => null,
       ),
@@ -161,14 +173,14 @@ class MockExamsScreen extends ConsumerWidget {
   }
 
   Widget? _buildFab(BuildContext context, WidgetRef ref,
-      List<ExamTemplate> templates, int loggedCount, int allowedSlots) {
+      List<ExamTemplate> templates, int loggedCount, int allowedSlots, String filter) {
     final theme = ref.read(themeProvider);
     return FloatingActionButton(
       onPressed: () {
         if (loggedCount >= allowedSlots) {
           MockExamMonetizationSheet.show(context);
         } else {
-          MockExamInputSheet.show(context, templates);
+          MockExamInputSheet.show(context, templates, initialTemplateId: filter);
         }
       },
       backgroundColor: theme.primary,
@@ -178,7 +190,7 @@ class MockExamsScreen extends ConsumerWidget {
     ).animate().scale(delay: 300.ms, duration: 400.ms, curve: Curves.elasticOut);
   }
 
-  Widget _buildBackgroundMesh(activeTheme) {
+  Widget _buildBackgroundMesh(AppThemeModel activeTheme) {
     return Stack(
       children: [
         Container(color: activeTheme.surface),
@@ -226,7 +238,7 @@ class MockExamsScreen extends ConsumerWidget {
 class _ChipSelector extends StatelessWidget {
   final List<ExamTemplate> templates;
   final String selected;
-  final dynamic theme;
+  final AppThemeModel theme;
   final ValueChanged<String> onSelected;
 
   const _ChipSelector({
@@ -238,10 +250,7 @@ class _ChipSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final chips = [
-      _ChipData('all', AppLocalizations.of(context)!.allFilter),
-      ...templates.map((t) => _ChipData(t.examId, t.displayName)),
-    ];
+    final chips = templates.map((t) => _ChipData(t.examId, t.displayName)).toList();
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
@@ -307,7 +316,7 @@ class _NetChart extends StatelessWidget {
   final List<MockExamRecord> records;
   final String filter;
   final List<ExamTemplate> templates;
-  final dynamic theme;
+  final AppThemeModel theme;
 
   const _NetChart({
     required this.records,
@@ -477,7 +486,7 @@ class _NetChart extends StatelessWidget {
 
 class _StatsSummary extends StatelessWidget {
   final List<MockExamRecord> records;
-  final dynamic theme;
+  final AppThemeModel theme;
 
   const _StatsSummary({required this.records, required this.theme});
 
@@ -521,7 +530,7 @@ class _StatPill extends StatelessWidget {
   final String label;
   final String value;
   final Color color;
-  final dynamic theme;
+  final AppThemeModel theme;
 
   const _StatPill({
     required this.label,
@@ -571,7 +580,7 @@ class _StatPill extends StatelessWidget {
 
 class _RecordCard extends StatelessWidget {
   final MockExamRecord record;
-  final dynamic theme;
+  final AppThemeModel theme;
   final VoidCallback onDelete;
 
   const _RecordCard({
@@ -758,7 +767,7 @@ class _SubjectStat extends StatelessWidget {
 // ─── Empty State ────────────────────────────────────────────────────────────
 
 class _EmptyState extends StatelessWidget {
-  final dynamic theme;
+  final AppThemeModel theme;
   const _EmptyState({required this.theme});
 
   @override

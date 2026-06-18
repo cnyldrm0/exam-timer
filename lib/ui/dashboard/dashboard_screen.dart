@@ -10,7 +10,9 @@ import 'widgets/monetization_modal.dart';
 import '../../core/theme/app_theme.dart';
 import '../../core/models/app_theme_model.dart';
 import '../../providers/theme_provider.dart';
+import '../../providers/pro_provider.dart';
 import '../../l10n/app_localizations.dart';
+import '../paywall/paywall_screen.dart';
 
 class DashboardScreen extends ConsumerWidget {
   const DashboardScreen({super.key});
@@ -20,6 +22,7 @@ class DashboardScreen extends ConsumerWidget {
     final selectedExams = ref.watch(examProvider);
     final slotState = ref.watch(slotProvider);
     final activeTheme = ref.watch(themeProvider);
+    final isPro = ref.watch(proAccessProvider);
 
     return Scaffold(
       body: Stack(
@@ -37,15 +40,26 @@ class DashboardScreen extends ConsumerWidget {
                 pinned: true,
                 centerTitle: true,
                 automaticallyImplyLeading: false,
-                title: Text(
-                  AppLocalizations.of(context)!.appTitle.toUpperCase(),
-                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                    letterSpacing: 2,
-                    fontWeight: FontWeight.bold,
-                    color: activeTheme.onSurface,
+                  title: Text(
+                    AppLocalizations.of(context)!.appTitle.toUpperCase(),
+                    style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                      letterSpacing: 2,
+                      fontWeight: FontWeight.bold,
+                      color: activeTheme.onSurface,
+                    ),
                   ),
-                ),
-                actions: [
+                  leading: isPro
+                      ? null
+                      : IconButton(
+                          icon: const Icon(Icons.star, color: Colors.amberAccent),
+                          tooltip: "PRO'ya Geç",
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(builder: (_) => const PaywallScreen()),
+                            );
+                          },
+                        ),
+                  actions: [
                   IconButton(
                     onPressed: () => _onAddNewExamTapped(context, ref, selectedExams.length, slotState),
                     icon: Icon(Icons.add_circle_outline_rounded, color: activeTheme.primary),

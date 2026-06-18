@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../providers/slot_provider.dart';
 import '../../../providers/theme_provider.dart';
+import '../../../providers/theme_provider.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../paywall/paywall_screen.dart';
 
 class MonetizationModal extends ConsumerWidget {
   const MonetizationModal({super.key});
@@ -64,6 +66,8 @@ class MonetizationModal extends ConsumerWidget {
               color: Colors.blueAccent,
               onTap: () => _handleWatchAd(context, ref),
             ),
+            const SizedBox(height: 12),
+            _buildProOptionCard(context),
             const SizedBox(height: 8),
           ],
         ),
@@ -102,6 +106,45 @@ class MonetizationModal extends ConsumerWidget {
               ),
             ),
             const Icon(Icons.chevron_right_rounded, color: Colors.white54),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildProOptionCard(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        Navigator.pop(context);
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (_) => const PaywallScreen()),
+        );
+      },
+      borderRadius: BorderRadius.circular(16),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          gradient: const LinearGradient(colors: [Colors.purple, Colors.deepPurpleAccent]),
+          boxShadow: [
+            BoxShadow(color: Colors.purple.withOpacity(0.4), blurRadius: 8, offset: const Offset(0, 3)),
+          ],
+        ),
+        child: const Row(
+          children: [
+            Icon(Icons.star_rounded, color: Colors.amberAccent, size: 28),
+            SizedBox(width: 16),
+            Expanded(
+              child: Text(
+                "PRO'YA GEÇ",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                ),
+              ),
+            ),
+            Icon(Icons.chevron_right_rounded, color: Colors.white70),
           ],
         ),
       ),

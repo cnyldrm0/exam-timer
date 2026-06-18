@@ -10,14 +10,23 @@ import '../../l10n/app_localizations.dart';
 
 class MockExamInputSheet extends ConsumerStatefulWidget {
   final List<ExamTemplate> templates;
-  const MockExamInputSheet({super.key, required this.templates});
+  final String? initialTemplateId;
 
-  static void show(BuildContext context, List<ExamTemplate> templates) {
+  const MockExamInputSheet({
+    super.key,
+    required this.templates,
+    this.initialTemplateId,
+  });
+
+  static void show(BuildContext context, List<ExamTemplate> templates, {String? initialTemplateId}) {
     showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
       isScrollControlled: true,
-      builder: (context) => MockExamInputSheet(templates: templates),
+      builder: (context) => MockExamInputSheet(
+        templates: templates,
+        initialTemplateId: initialTemplateId,
+      ),
     );
   }
 
@@ -42,7 +51,14 @@ class _MockExamInputSheetState extends ConsumerState<MockExamInputSheet> {
   @override
   void initState() {
     super.initState();
-    _selectedTemplate = widget.templates.first;
+    if (widget.initialTemplateId != null && widget.initialTemplateId != 'all') {
+      _selectedTemplate = widget.templates.firstWhere(
+        (t) => t.examId == widget.initialTemplateId,
+        orElse: () => widget.templates.first,
+      );
+    } else {
+      _selectedTemplate = widget.templates.first;
+    }
     _rebuildEntries();
   }
 

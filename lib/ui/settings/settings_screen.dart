@@ -4,14 +4,14 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../core/theme/app_theme.dart';
 import '../widgets/glass_container.dart';
 import '../onboarding/onboarding_screen.dart';
-import '../studio/widget_studio_screen.dart';
 import '../../core/models/app_theme_model.dart';
 import '../../providers/theme_provider.dart';
 import '../../l10n/app_localizations.dart';
 import '../../providers/locale_provider.dart';
 import 'exam_date_editor_screen.dart';
 import 'custom_exam_editor_screen.dart';
-import '../customize/customize_screen.dart';
+import '../paywall/paywall_screen.dart';
+import '../../providers/pro_provider.dart';
 
 class SettingsScreen extends ConsumerWidget {
   final VoidCallback? onBackToHome;
@@ -19,7 +19,7 @@ class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key, this.onBackToHome});
 
   Future<void> _launchUrl() async {
-    final Uri url = Uri.parse('https://www.google.com');
+    final Uri url = Uri.parse('https://docs.google.com/document/d/1Db7_A3KAjtkmroCn2NJqCiE_bn5Bj7zCtRnHi5sVZbo/edit?usp=sharing');
     if (!await launchUrl(url)) {
       throw Exception('Could not launch $url');
     }
@@ -58,37 +58,63 @@ class SettingsScreen extends ConsumerWidget {
                   padding: const EdgeInsets.all(24.0),
                   child: Column(
                     children: [
-                      // Widget Studio Section
-                      GlassContainer(
-                        padding: const EdgeInsets.symmetric(vertical: 8),
-                        child: ListTile(
-                          leading: Icon(Icons.auto_fix_high_outlined, color: activeTheme.primary),
-                          title: Text(AppLocalizations.of(context)!.widgetStudio, style: Theme.of(context).textTheme.bodyMedium),
-                          subtitle: Text(AppLocalizations.of(context)!.widgetStudioSubtitle, style: Theme.of(context).textTheme.labelSmall?.copyWith(fontSize: 10)),
-                          trailing: Icon(Icons.chevron_right, color: activeTheme.outline),
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(builder: (_) => const WidgetStudioScreen()),
-                            );
-                          },
+                      // Pro Section
+                      if (!ref.watch(proAccessProvider))
+                        Container(
+                          margin: const EdgeInsets.only(bottom: 16),
+                          decoration: BoxDecoration(
+                            gradient: const LinearGradient(colors: [Colors.purple, Colors.deepPurpleAccent]),
+                            borderRadius: BorderRadius.circular(16),
+                            boxShadow: [
+                              BoxShadow(color: Colors.purple.withOpacity(0.4), blurRadius: 10, offset: const Offset(0, 4)),
+                            ],
+                          ),
+                          child: Material(
+                            color: Colors.transparent,
+                            child: InkWell(
+                              borderRadius: BorderRadius.circular(16),
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(builder: (_) => const PaywallScreen()),
+                                );
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      padding: const EdgeInsets.all(8),
+                                      decoration: BoxDecoration(
+                                        color: Colors.white.withOpacity(0.2),
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: const Icon(Icons.workspace_premium, color: Colors.amberAccent),
+                                    ),
+                                    const SizedBox(width: 16),
+                                    const Expanded(
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "PRO'YA GEÇ",
+                                            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
+                                          ),
+                                          SizedBox(height: 4),
+                                          Text(
+                                            "Sınırları kaldır, premium temalara eriş.",
+                                            style: TextStyle(color: Colors.white70, fontSize: 12),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    const Icon(Icons.chevron_right, color: Colors.white70),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 16),
-                      // Theme Change Section
-                      GlassContainer(
-                        padding: const EdgeInsets.symmetric(vertical: 8),
-                        child: ListTile(
-                          leading: Icon(Icons.palette_outlined, color: activeTheme.primary),
-                          title: Text(AppLocalizations.of(context)!.changeTheme, style: Theme.of(context).textTheme.bodyMedium),
-                          subtitle: Text(AppLocalizations.of(context)!.changeThemeSubtitle, style: Theme.of(context).textTheme.labelSmall?.copyWith(fontSize: 10)),
-                          trailing: Icon(Icons.chevron_right, color: activeTheme.outline),
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(builder: (_) => const CustomizeScreen()),
-                            );
-                          },
-                        ),
-                      ),
+                      
                       // Language Section
                       GlassContainer(
                         padding: const EdgeInsets.symmetric(vertical: 8),

@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../providers/mock_exam_provider.dart';
 import '../../providers/theme_provider.dart';
 import '../../l10n/app_localizations.dart';
+import '../paywall/paywall_screen.dart';
 
 /// Premium monetization sheet that blocks the 6th+ mock exam entry and
 /// offers +5 slots via rewarded ad.
@@ -123,7 +124,50 @@ class MockExamMonetizationSheet extends ConsumerWidget {
                 ),
               ),
             ),
+            const SizedBox(height: 12),
+            _buildProOptionCard(context),
             const SizedBox(height: 8),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildProOptionCard(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.pop(context);
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (_) => const PaywallScreen()),
+        );
+      },
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          gradient: const LinearGradient(colors: [Colors.purple, Colors.deepPurpleAccent]),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.purple.withOpacity(0.4),
+              blurRadius: 16,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: const Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.star_rounded, color: Colors.amberAccent, size: 22),
+            SizedBox(width: 10),
+            Text(
+              "PRO'YA GEÇ",
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w700,
+                fontSize: 14,
+              ),
+            ),
           ],
         ),
       ),

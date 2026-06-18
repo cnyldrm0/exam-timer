@@ -50,18 +50,30 @@ class ExamModel {
 
   String get shortTitle {
     final String fullTitle = title.toLowerCase();
+    final String fullId = id.toLowerCase();
     
     if (fullTitle.contains('yükseköğretim kurumları sınavı')) {
-      if (fullTitle.contains('temel yeterlilik')) return 'YKS (TYT)';
-      if (fullTitle.contains('alan yeterlilik')) return 'YKS (AYT)';
-      if (fullTitle.contains('yabancı dil testi')) return 'YKS (YDT)';
+      if (fullTitle.contains('temel yeterlilik') || fullId.contains('tyt')) return 'YKS (TYT)';
+      if (fullTitle.contains('alan yeterlilik') || fullId.contains('ayt')) return 'YKS (AYT)';
+      if (fullTitle.contains('yabancı dil testi') || fullId.contains('ydt')) return 'YKS (YDT)';
       return 'YKS';
     }
     
-    if (fullTitle.contains('kamu personel seçme sınavı')) {
-      if (fullTitle.contains('ön lisans')) return 'KPSS (Önlisans)';
-      if (fullTitle.contains('ortaöğretim')) return 'KPSS (Ortaöğretim)';
-      if (fullTitle.contains('genel yetenek')) return 'KPSS (Lisans)';
+    if (fullTitle.contains('kamu personel')) {
+      if (fullTitle.contains('engelli') || fullId.contains('ekpss')) {
+        if (fullId.contains('kura')) return 'EKPSS (Kura)';
+        return 'EKPSS';
+      }
+      
+      if (fullId.contains('ön lisans') || fullId.contains('önlisans')) return 'KPSS (Ön Lisans)';
+      if (fullId.contains('ortaöğretim')) return 'KPSS (Ortaöğretim)';
+      if (fullId.contains('genel yetenek')) return 'KPSS (Lisans)';
+      if (fullId.contains('alan bilgisi')) {
+        if (fullId.contains('1. gün')) return 'KPSS (Alan Bilgisi 1. Gün)';
+        if (fullId.contains('2. gün')) return 'KPSS (Alan Bilgisi 2. Gün)';
+        return 'KPSS (Alan Bilgisi)';
+      }
+      if (fullId.contains('dhbt')) return 'KPSS (DHBT)';
       return 'KPSS';
     }
 
@@ -72,10 +84,9 @@ class ExamModel {
     if (fullTitle.contains('yabancı dil bilgisi seviye tespit sınavı')) return 'YDS';
     if (fullTitle.contains('tıpta uzmanlık eğitimi giriş sınavı')) return 'TUS';
     if (fullTitle.contains('diş hekimliğinde uzmanlık eğitimi giriş sınavı')) return 'DUS';
-    if (fullTitle.contains('engelli kamu personel seçme sınavı')) return 'EKPSS';
     
     if (isCustom) return title;
-    return id.replaceAll('2026-', '');
+    return id.replaceAll(RegExp(r'^\d{4}-'), '');
   }
 
   factory ExamModel.fromJson(Map<String, dynamic> json) {

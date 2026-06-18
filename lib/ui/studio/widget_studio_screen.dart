@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../providers/widget_provider.dart';
 import '../../providers/exam_provider.dart';
 import '../../providers/timer_provider.dart';
+import '../../providers/theme_provider.dart';
+import '../../providers/pro_provider.dart';
 import '../../core/theme/app_theme.dart';
 import '../../main.dart';
 import '../widgets/glass_container.dart';
@@ -110,43 +112,7 @@ class WidgetStudioScreen extends ConsumerWidget {
           SafeArea(
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      // Centered Title
-                      SizedBox(
-                        width: double.infinity,
-                        child: Center(
-                          child: Text(
-                            AppStrings.widgetStudio(context),
-                            style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                              color: Colors.white,
-                              letterSpacing: 2,
-                            ),
-                          ),
-                        ),
-                      ),
-                      // Button on the right
-                      Positioned(
-                        right: 0,
-                        child: GestureDetector(
-                          onTap: () => _showTutorial(context),
-                          child: Container(
-                            padding: const EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.1),
-                              shape: BoxShape.circle,
-                              border: Border.all(color: Colors.white24),
-                            ),
-                            child: const Icon(Icons.help_outline_rounded, color: Colors.white70, size: 16),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                const SizedBox(height: 74),
 
                 Expanded(
                   flex: 2,
@@ -281,16 +247,45 @@ class WidgetStudioScreen extends ConsumerWidget {
                           ),
                         ),
                         const Spacer(),
-                        ElevatedButton(
-                          onPressed: () async {
-                            await notifier.applyToWidget();
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: AppTheme.primary,
-                            foregroundColor: Colors.black,
-                            minimumSize: const Size(double.infinity, 52),
-                          ),
-                          child: Text(AppStrings.applyAndAdd(context), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: ElevatedButton(
+                                onPressed: () async {
+                                  final isPro = ref.read(proAccessProvider);
+                                  if (isPro) {
+                                    await notifier.applyToWidget();
+                                  } else {
+                                    ref.read(adManagerProvider).showInterstitialAd(
+                                      onComplete: () async {
+                                        await notifier.applyToWidget();
+                                      },
+                                    );
+                                  }
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: AppTheme.primary,
+                                  foregroundColor: Colors.black,
+                                  minimumSize: const Size(0, 52),
+                                ),
+                                child: Text(AppStrings.applyAndAdd(context), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            GestureDetector(
+                              onTap: () => _showTutorial(context),
+                              child: Container(
+                                width: 52,
+                                height: 52,
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withOpacity(0.1),
+                                  shape: BoxShape.circle,
+                                  border: Border.all(color: Colors.white24),
+                                ),
+                                child: const Icon(Icons.help_outline_rounded, color: Colors.white70),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),

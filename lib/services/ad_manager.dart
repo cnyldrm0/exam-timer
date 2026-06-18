@@ -15,7 +15,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 /// Usage (Banner):
 ///   await adManager.loadBannerAd(context);
 ///   // Then use adManager.getBannerAdWidget() in your widget tree.
-class AdManager {
+class AdManager extends ChangeNotifier {
   // ──────────────────────────────────────────────────────────────────────────
   // AD UNIT IDs
   // ──────────────────────────────────────────────────────────────────────────
@@ -23,13 +23,16 @@ class AdManager {
   /// PRODUCTION: Replace this string with your real Ad Unit ID from
   ///             AdMob console → Ad Units → Rewarded before publishing.
   static const String _rewardedAdUnitId =
-      'ca-app-pub-3940256099942544/5224354917'; // ← REPLACE FOR PRODUCTION
+      'ca-app-pub-3734871803680639/4987907879'; // ← REPLACE FOR PRODUCTION
 
   /// TEST Banner Ad Unit ID (Google official test ID — safe for development).
   /// PRODUCTION: Replace this string with your real Ad Unit ID from
   ///             AdMob console → Ad Units → Banner before publishing.
   static const String _bannerAdUnitId =
-      'ca-app-pub-3940256099942544/9214589741'; // ← REPLACE FOR PRODUCTION
+      'ca-app-pub-3734871803680639/2751866978'; // ← REPLACE FOR PRODUCTION
+
+  static const String _interstitialAdUnitId =
+      'ca-app-pub-3734871803680639/9290147752'; // Interstitial Ad Unit
 
   // ──────────────────────────────────────────────────────────────────────────
 
@@ -39,6 +42,9 @@ class AdManager {
   BannerAd? _bannerAd;
   bool _isBannerLoaded = false;
   bool _isBannerLoading = false;
+
+  InterstitialAd? _interstitialAd;
+  bool _isInterstitialLoading = false;
 
   /// Returns `true` if a rewarded ad is loaded and ready to show.
   bool get isReady => _rewardedAd != null;
@@ -68,6 +74,7 @@ class AdManager {
           _isBannerLoaded = true;
           _isBannerLoading = false;
           debugPrint('[AdManager] Banner ad loaded successfully.');
+          notifyListeners();
         },
         onAdFailedToLoad: (ad, error) {
           ad.dispose();
@@ -75,6 +82,7 @@ class AdManager {
           _isBannerLoaded = false;
           _isBannerLoading = false;
           debugPrint('[AdManager] Failed to load banner ad: $error');
+          notifyListeners();
         },
       ),
     );
@@ -177,11 +185,71 @@ class AdManager {
     );
   }
 
+  // ════════════════════════════════════════════════════════════════════════════
+  // INTERSTITIAL AD
+  // ════════════════════════════════════════════════════════════════════════════
+
+  Future<void> loadInterstitialAd() async {
+    if (_isInterstitialLoading || _interstitialAd != null) return;
+    _isInterstitialLoading = true;
+
+    await InterstitialAd.load(
+      adUnitId: _interstitialAdUnitId,
+      request: const AdRequest(),
+      adLoadCallback: InterstitialAdLoadCallback(
+        onAdLoaded: (ad) {
+          _interstitialAd = ad;
+          _isInterstitialLoading = false;
+          debugPrint('[AdManager] Interstitial ad loaded successfully.');
+        },
+        onAdFailedToLoad: (error) {
+          _interstitialAd = null;
+          _isInterstitialLoading = false;
+          debugPrint('[AdManager] Failed to load interstitial ad: $error');
+        },
+      ),
+    );
+  }
+
+  /// Shows the interstitial ad. Calls [onComplete] immediately if the ad
+  /// is not ready or after the ad is dismissed.
+  void showInterstitialAd({required VoidCallback onComplete}) {
+    if (_interstitialAd == null) {
+      debugPrint('[AdManager] Interstitial Ad not ready, proceeding immediately.');
+      onComplete();
+      loadInterstitialAd(); // Load for next time
+      return;
+    }
+
+    _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
+      onAdDismissedFullScreenContent: (ad) {
+        debugPrint('[AdManager] Interstitial ad dismissed.');
+        ad.dispose();
+        _interstitialAd = null;
+        loadInterstitialAd(); // Preload for next time
+        onComplete();
+      },
+      onAdFailedToShowFullScreenContent: (ad, error) {
+        debugPrint('[AdManager] Failed to show interstitial ad: $error');
+        ad.dispose();
+        _interstitialAd = null;
+        loadInterstitialAd();
+        onComplete();
+      },
+    );
+
+    _interstitialAd!.show();
+  }
+
+  @override
   void dispose() {
     _rewardedAd?.dispose();
     _rewardedAd = null;
     _bannerAd?.dispose();
     _bannerAd = null;
     _isBannerLoaded = false;
+    _interstitialAd?.dispose();
+    _interstitialAd = null;
+    super.dispose();
   }
 }

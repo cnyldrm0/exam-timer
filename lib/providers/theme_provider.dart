@@ -4,6 +4,7 @@ import '../core/models/app_theme_model.dart';
 import '../services/storage_service.dart';
 import '../services/ad_manager.dart';
 import 'exam_provider.dart'; // for storageServiceProvider
+import 'pro_provider.dart';
 
 // ──────────────────────────────────────────────────────────────────────────────
 // ACTIVE THEME PROVIDER
@@ -42,8 +43,9 @@ final themeProvider =
 
 class UnlockedThemesNotifier extends StateNotifier<Set<String>> {
   final StorageService _storageService;
+  final bool _isPro;
 
-  UnlockedThemesNotifier(this._storageService)
+  UnlockedThemesNotifier(this._storageService, this._isPro)
       : super(_load(_storageService));
 
   static Set<String> _load(StorageService storage) {
@@ -56,6 +58,9 @@ class UnlockedThemesNotifier extends StateNotifier<Set<String>> {
   /// Returns true if a theme is accessible (either catalog-unlocked or
   /// permanently earned via rewarded ad).
   bool isUnlocked(AppThemeModel model) {
+    // Pro users get everything
+    if (_isPro) return true;
+    
     // Catalog-level unlock (e.g. the default free theme)
     if (model.isUnlocked) return true;
     // Earned unlock from storage
@@ -72,7 +77,8 @@ class UnlockedThemesNotifier extends StateNotifier<Set<String>> {
 final unlockedThemesProvider =
     StateNotifierProvider<UnlockedThemesNotifier, Set<String>>((ref) {
   final storage = ref.watch(storageServiceProvider);
-  return UnlockedThemesNotifier(storage);
+  final isPro = ref.watch(proAccessProvider);
+  return UnlockedThemesNotifier(storage, isPro);
 });
 
 // ──────────────────────────────────────────────────────────────────────────────
@@ -80,10 +86,11 @@ final unlockedThemesProvider =
 // A single AdManager instance, scoped to the provider tree.
 // ──────────────────────────────────────────────────────────────────────────────
 
-final adManagerProvider = Provider<AdManager>((ref) {
+final adManagerProvider = ChangeNotifierProvider<AdManager>((ref) {
   final manager = AdManager();
   // Pre-load immediately when the provider is first read.
   manager.loadAd();
+  manager.loadInterstitialAd();
   ref.onDispose(manager.dispose);
   return manager;
 });

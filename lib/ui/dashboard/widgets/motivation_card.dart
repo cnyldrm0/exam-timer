@@ -46,7 +46,7 @@ class MotivationCard extends ConsumerWidget {
                   ),
                   const SizedBox(width: 8),
                   Text(
-                    'GÜNÜN MOTİVASYON SÖZÜ',
+                    'GÜNÜN SÖZÜ',
                     style: Theme.of(context).textTheme.labelSmall?.copyWith(
                       letterSpacing: 1.2,
                       color: AppTheme.secondary.withOpacity(0.8),

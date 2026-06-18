@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 // ─── Subject Template (from JSON) ───────────────────────────────────────────
@@ -83,11 +84,16 @@ class ExamTemplate {
 
   /// Loads all templates from the bundled asset.
   static Future<List<ExamTemplate>> loadTemplates() async {
-    final raw = await rootBundle.loadString('lib/assets/exam_templates.json');
-    final List<dynamic> data = json.decode(raw);
-    return data
-        .map((e) => ExamTemplate.fromJson(e as Map<String, dynamic>))
-        .toList();
+    try {
+      final raw = await rootBundle.loadString('lib/assets/exam_templates.json');
+      final List<dynamic> data = json.decode(raw);
+      return data
+          .map((e) => ExamTemplate.fromJson(e as Map<String, dynamic>))
+          .toList();
+    } catch (e) {
+      debugPrint('[ExamTemplate] Failed to load templates: $e');
+      return [];
+    }
   }
 }
 

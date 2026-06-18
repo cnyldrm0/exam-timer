@@ -189,7 +189,7 @@
     "sinav_tarihi": "09.05.2026 13:45",
     "basvuru_tarihleri": "16.04.2026 14:00 - 03.05.2026 23:59",
     "gec_basvuru_tarihi": null,
-    "sonuc_tarihi": "10.06.2026"
+    "sonuc_tarihi": "11.06.2026"
   },
   {
     "sinav_kodu": "2026-ALES/1",
@@ -307,7 +307,7 @@
     "sinav_kodu": "2026-ALES/2",
     "sinav_adi": "Akademik Personel ve Lisansüstü Eğitimi Giriş Sınavı",
     "sinav_tarihi": "02.08.2026",
-    "basvuru_tarihleri": "10.06.2026 - 18.06.2026",
+    "basvuru_tarihleri": "10.06.2026 10:00 - 18.06.2026 23:59",
     "gec_basvuru_tarihi": "25.06.2026 - 25.06.2026 23:59",
     "sonuc_tarihi": "21.08.2026"
   },
@@ -440,6 +440,14 @@
     "sonuc_tarihi": "19.11.2026"
   },
   {
+    "sinav_kodu": "2026-Sayıştay Eleme",
+    "sinav_adi": "Sayıştay Başkanlığı Sayıştay Denetçi Yardımcısı Adaylığı Eleme Sınavı",
+    "sinav_tarihi": "31.10.2026",
+    "basvuru_tarihleri": "09.09.2026 - 17.09.2026",
+    "gec_basvuru_tarihi": "30.09.2026 - 30.09.2026 23:59",
+    "sonuc_tarihi": "19.11.2026"
+  },
+  {
     "sinav_kodu": "2026-DUS 2.Dönem",
     "sinav_adi": "Diş Hekimliğinde Uzmanlık Eğitimi Giriş Sınavı",
     "sinav_tarihi": "01.11.2026",
@@ -507,8 +515,24 @@
     "sinav_kodu": "e-YDS 2026/12",
     "sinav_adi": "Elektronik Yabancı Dil Sınavı (İngilizce)",
     "sinav_tarihi": "19.12.2026",
+    "basvuru_tarihleri": "02.12.2026 - 10.12.2026",
+    "gec_basvuru_tarihi": null,
+    "sonuc_tarihi": "19.12.2026"
+  },
+  {
+    "sinav_kodu": "2026-Sayıştay Yazılı 1.Gün",
+    "sinav_adi": "Sayıştay Başkanlığı Sayıştay Denetçi Yardımcısı Adaylığı Yazılı Sınavı",
+    "sinav_tarihi": "26.12.2026",
     "basvuru_tarihleri": null,
     "gec_basvuru_tarihi": null,
-    "sonuc_tarihi": null
+    "sonuc_tarihi": "27.01.2027"
+  },
+  {
+    "sinav_kodu": "2026-Sayıştay Yazılı 2.Gün",
+    "sinav_adi": "Sayıştay Başkanlığı Sayıştay Denetçi Yardımcısı Adaylığı Yazılı Sınavı",
+    "sinav_tarihi": "27.12.2026",
+    "basvuru_tarihleri": null,
+    "gec_basvuru_tarihi": null,
+    "sonuc_tarihi": "27.01.2027"
   }
 ]
